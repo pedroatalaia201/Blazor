@@ -1,0 +1,41 @@
+@page "/"
+
+<h1>Hello World</h1>
+ 
+<div class = "uk-margin">
+    <div class = "uk-inline uk-width-1-1">
+        <!-- the 'onclick' made the call of a method that is within C# code -->
+        <button class = "uk-form-icon uk-form-icon-flip" uk-icon = "icon: plus-circle" @onclick = "AddNewTask"></button>
+        <!-- the '@bind' connect some variables in the C# code(?) -->
+        <input class = "uk-input uk-form-large uk-width-1-1" placeholder = "New task" @bind = "newTodo" />
+    </div>
+</div>
+
+<ul class = "uk-list uk-list-divider uk-list-large">
+    @foreach (var item in todos)
+    {
+        <li>
+            <input class = "uk-checkbox" type = "checkbox" @bind = "item.IsDone"/> @item.Title
+        </li>
+    }
+</ul>
+
+@code{
+    public class TodoItem
+    {
+        public string Title {get; set;}
+        public bool IsDone {get; set;}
+    }
+
+    private string newTodo = "";
+    private List<TodoItem> todos = new List<TodoItem>();
+
+    void AddNewTask()
+    {
+        if(!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = "";
+        }
+    }
+}

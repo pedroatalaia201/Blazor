@@ -90,6 +90,30 @@ using todo.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 23 "/home/agenciaw3/Documents/Course/DotnetMVC/todo/Pages/Index.razor"
+      
+    public class TodoItem
+    {
+        public string Title {get; set;}
+        public bool IsDone {get; set;}
+    }
+
+    private string newTodo = "";
+    private List<TodoItem> todos = new List<TodoItem>();
+
+    void AddNewTask()
+    {
+        if(!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = "";
+        }
+    }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591
